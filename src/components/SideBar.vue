@@ -13,20 +13,12 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import { useUserStore } from '../stores/UserStore';
-export default defineComponent(
-    {
-        setup() {
-            const userStore = useUserStore()
-            function logout(): void {
-                userStore.logout()
-            }
-            return { userStore, logout }
-        }
-    }
-)
+const userStore = useUserStore()
+function logout(): void {
+    userStore.logout()
+}
 </script>
 
 <style>

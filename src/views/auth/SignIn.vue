@@ -12,61 +12,55 @@
     </form>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue"
+<script setup lang="ts">
+import { ref } from "vue";
 import funcs from "../../commons/functions"
 import SignInInput from "../../types/signin-input"
-export default defineComponent(
-    {
-        setup() {
-            // vars
-            const errors = ref({
-                email: "",
-                password: "",
-                general: ""
-            })
-            const isLoading = ref<boolean>(false)
 
-            // models
-            const signInInput = ref<SignInInput>({
-                email: "some1@gmail.com",
-                password: "000000"
-            })
+// vars
+const errors = ref({
+    email: "",
+    password: "",
+    general: ""
+})
+const isLoading = ref<boolean>(false)
 
-            // handle submission
-            async function handleSubmission() {
-                isLoading.value = true
-                // vars
-                let hasError: boolean = false
+// models
+const signInInput = ref<SignInInput>({
+    email: "some1@gmail.com",
+    password: "000000"
+})
 
-                // check
-                const isValidEmail = funcs.isValidEmail(signInInput.value.email)
-                if (!isValidEmail.isValid) {
-                    errors.value.email = isValidEmail.message
-                    hasError = true
-                } else {
-                    errors.value.email = ""
-                }
-                const isValidPassword = funcs.isValidPassword(signInInput.value.password)
-                if (!isValidPassword.isValid) {
-                    errors.value.password = isValidPassword.message
-                    hasError = true
-                } else {
-                    errors.value.password = ""
-                }
-                if (hasError) {
-                    isLoading.value = false
-                } else {
-                    console.log("good")
-                }
-                // fetch
+// handle submission
+async function handleSubmission() {
+    isLoading.value = true
+    // vars
+    let hasError: boolean = false
 
-                // authorize
-
-                // redirect
-            }
-            return { errors, signInInput, handleSubmission }
-        }
+    // check
+    const isValidEmail = funcs.isValidEmail(signInInput.value.email)
+    if (!isValidEmail.isValid) {
+        errors.value.email = isValidEmail.message
+        hasError = true
+    } else {
+        errors.value.email = ""
     }
-)
+    const isValidPassword = funcs.isValidPassword(signInInput.value.password)
+    if (!isValidPassword.isValid) {
+        errors.value.password = isValidPassword.message
+        hasError = true
+    } else {
+        errors.value.password = ""
+    }
+    if (hasError) {
+        isLoading.value = false
+    } else {
+        console.log("good")
+    }
+    // fetch
+
+    // authorize
+
+    // redirect
+}
 </script>
