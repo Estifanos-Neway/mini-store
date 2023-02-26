@@ -6,9 +6,9 @@ import SignIn from "../views/auth/SignIn.vue"
 
 const routes = [
     {
-        name:"Home",
-        path:"/",
-        component:Home
+        name: "Home",
+        path: "/",
+        component: Home
     },
     {
         name: "SignUp",

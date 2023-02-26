@@ -5,19 +5,22 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import AuthorizedHome from '../../components/AuthorizedHome.vue';
 import UnauthorizedHome from '../../components/UnauthorizedHome.vue';
 import { useUserStore } from '../../stores/UserStore';
 
-export default {
-    components: {
-        AuthorizedHome,
-        UnauthorizedHome
-    },
-    setup() {
-        const userStore = useUserStore()
-        return {userStore}
+export default defineComponent(
+    {
+        components: {
+            AuthorizedHome,
+            UnauthorizedHome
+        },
+        setup() {
+            const userStore = useUserStore()
+            return { userStore }
+        }
     }
-}
+)
 </script>

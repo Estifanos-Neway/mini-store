@@ -1,15 +1,21 @@
 <template>
-    <div>
-        You are signed in as {{ userStore.user.email }}
+    <div class="break-words">
+        Your accessToken is
+        <br>
+        <br>
+        {{ userStore.tokens.accessToken }}
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { useUserStore } from '../stores/UserStore'
-export default {
-    setup() {
-        const userStore = useUserStore()
-        return { userStore }
+export default defineComponent(
+    {
+        setup() {
+            const userStore = useUserStore()
+            return { userStore }
+        }
     }
-}
+)
 </script>
