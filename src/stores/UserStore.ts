@@ -10,9 +10,16 @@ export const useUserStore = defineStore("userStore", {
         } as UserAuth,
         user: null as User | null
     }),
+    persist: true,
     getters: {
         isAuthorized(state): boolean {
-            return state.user !== null
+            return state.tokens.accessToken.length > 0
+        },
+        accessToken(state) {
+            return state.tokens.accessToken
+        },
+        refreshToken(state) {
+            return state.tokens.refreshToken
         }
     },
     actions: {
@@ -23,11 +30,8 @@ export const useUserStore = defineStore("userStore", {
                 refreshToken: ""
             }
         },
-        authorize(userAuth: UserAuth): void {
+        async authorize(userAuth: UserAuth): Promise<void> {
             this.tokens = userAuth
-            // fetch user
-            // assign user
-            this.user = { email: "someemail@gmail.com" }
         }
     }
 })

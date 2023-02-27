@@ -1,0 +1,9 @@
+query currentUserQuery {
+  me {
+    id
+    fullName
+    email
+    avatarImageUrl
+    memberSince
+  }
+}

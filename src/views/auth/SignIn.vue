@@ -8,14 +8,26 @@
         <label for="password">Password</label>
         <input type="password" v-model="signInInput.password">
         <div v-if="errors.password" class="text-red-600">{{ errors.password }}</div>
-        <button type="submit">Submit</button>
+        <div v-if="isLoading">Loading...</div>
+        <button v-else type="submit">Submit</button>
     </form>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import axios, { AxiosError } from "axios"
+import { ref } from "vue"
+import vars from "../../commons/variables"
 import funcs from "../../commons/functions"
 import SignInInput from "../../types/signin-input"
+import { useUserStore } from "../../stores/UserStore"
+import { useRouter } from "vue-router"
+
+// redirect
+const userStore = useUserStore()
+const router = useRouter();
+if(userStore.isAuthorized){
+    router.replace({ name: "Home" })
+}
 
 // vars
 const errors = ref({
@@ -55,12 +67,31 @@ async function handleSubmission() {
     if (hasError) {
         isLoading.value = false
     } else {
-        console.log("good")
+        try {
+            // fetch
+            const response = await axios.post(
+                vars.authSignInUrl,
+                {
+                    email: signInInput.value.email,
+                    passwordHash: signInInput.value.password
+                }
+            )
+            // authorize
+            await userStore.authorize(
+                {
+                    accessToken: response.data.accessToken, refreshToken: response.data.refreshToken
+                }
+            )
+            // redirect
+            router.replace({ name: "Home" })
+        } catch (error) {
+            if ((error as AxiosError).response?.status === 404) {
+                errors.value.general = "No account found with these credentials"
+            } else {
+                errors.value.general = vars.unknownErrorMessage
+            }
+            isLoading.value = false
+        }
     }
-    // fetch
-
-    // authorize
-
-    // redirect
 }
 </script>

@@ -25,8 +25,14 @@ import vars from "../../commons/variables"
 import funcs from "../../commons/functions"
 import SignUpInput from "../../types/signup-input"
 
-// vars
+// redirect
 const userStore = useUserStore()
+const router = useRouter();
+if(userStore.isAuthorized){
+    router.replace({ name: "Home" })
+}
+
+// vars
 const isLoading = ref<boolean>(false)
 const errors = ref(
     {
@@ -37,7 +43,6 @@ const errors = ref(
     }
 )
 // models
-const router = useRouter();
 const signUpInput = ref<SignUpInput>({
     fullName: "fn",
     email: "some@gmail.com",
@@ -78,7 +83,7 @@ async function handleSubmission() {
     } else {
         try {
             const response = await axios.post(
-                `${vars.authBaseUrl}/signup`,
+                vars.authSignUpUrl,
                 {
                     fullName: signUpInput.value.fullName,
                     email: signUpInput.value.email,
@@ -98,7 +103,7 @@ async function handleSubmission() {
             if ((error as AxiosError).response?.status === 409) {
                 errors.value.general = "Email already in use"
             } else {
-                errors.value.general = "Something went wrong, please try again."
+                errors.value.general = vars.unknownErrorMessage
             }
             isLoading.value = false
         }

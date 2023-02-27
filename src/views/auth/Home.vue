@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <AuthorizedHome v-if="userStore.isAuthorized" />
-        <UnauthorizedHome v-else />
-    </div>
 </template>
 
 <script setup lang="ts">
-import AuthorizedHome from '../../components/AuthorizedHome.vue';
-import UnauthorizedHome from '../../components/UnauthorizedHome.vue';
 import { useUserStore } from '../../stores/UserStore';
+import { useRouter } from "vue-router"
 
 const userStore = useUserStore()
+const router = useRouter()
+if (userStore.isAuthorized) {
+    router.replace({ name: "Stores" })
+} else {
+    router.replace({ name: "SignIn" })
+}
 </script>
