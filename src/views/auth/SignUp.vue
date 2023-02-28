@@ -24,13 +24,13 @@ import { useUserStore } from '../../stores/UserStore';
 import axios, { Axios, AxiosError } from "axios"
 import vars from "../../commons/variables"
 import funcs from "../../commons/functions"
-import SignUpInput from "../../types/signup-input"
+import SignUpInput from "../../types/user/signup-input"
 
 // redirect
 const userStore = useUserStore()
 const router = useRouter();
 if(userStore.isAuthorized){
-    router.replace({ name: "Home" })
+    router.replace({ name: "Index" })
 }
 
 // vars
@@ -99,7 +99,7 @@ async function handleSubmission() {
                 }
             )
             // redirect
-            router.replace({ name: "Home" })
+            router.replace({ name: "Index" })
         } catch (error) {
             if ((error as AxiosError).response?.status === 409) {
                 errors.value.general = "Email already in use"

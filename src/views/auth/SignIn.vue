@@ -19,7 +19,7 @@ import axios, { AxiosError } from "axios"
 import { ref } from "vue"
 import vars from "../../commons/variables"
 import funcs from "../../commons/functions"
-import SignInInput from "../../types/signin-input"
+import SignInInput from "../../types/user/signin-input"
 import { useUserStore } from "../../stores/UserStore"
 import { useRouter } from "vue-router"
 
@@ -27,7 +27,7 @@ import { useRouter } from "vue-router"
 const userStore = useUserStore()
 const router = useRouter();
 if(userStore.isAuthorized){
-    router.replace({ name: "Home" })
+    router.replace({ name: "Index" })
 }
 
 // vars
@@ -84,7 +84,7 @@ async function handleSubmission() {
                 }
             )
             // redirect
-            router.replace({ name: "Home" })
+            router.replace({ name: "Index" })
         } catch (error) {
             if ((error as AxiosError).response?.status === 404) {
                 errors.value.general = "No account found with these credentials"

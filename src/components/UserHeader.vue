@@ -15,7 +15,7 @@
 import { useQuery } from '@vue/apollo-composable';
 import { currentUserQuery } from '../graphql/queries/userQueries';
 import { useUserStore } from '../stores/UserStore';
-import User from '../types/user';
+import User from '../types/user/user';
 
 const userStore = useUserStore();
 

@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 let getAllStores = gql`
-query GetAllStores {
-  stores {
+query GetAllStores($offset: Int, $limit: Int) {
+  stores(offset: $offset, limit: $limit) {
     avatarImageUrl
     id
     name
@@ -14,8 +14,8 @@ query GetAllStores {
 }
 `
 let getMyStores = gql`
-query GetMyStores($userId: uuid!) {
-  stores(where: {userId: {_eq: $userId}}) {
+query GetMyStores($userId: uuid!,$offset: Int, $limit: Int) {
+  stores(where: {userId: {_eq: $userId}},offset: $offset, limit: $limit) {
     avatarImageUrl
     id
     name
