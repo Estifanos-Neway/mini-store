@@ -16,7 +16,8 @@ pinia.use(piniaPluginPersistedstate)
 
 // apollo
 const authLink = new ApolloLink((operation, forward) => {
-    const token = getAccessToken()
+    const userStore = useUserStore()
+    const token = userStore.accessToken
     operation.setContext({
         headers: {
             authorization: token ? `Bearer ${token}` : ''
@@ -31,14 +32,9 @@ const httpLink = new HttpLink({
 
 const apolloClient = new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
 });
 
-function getAccessToken(): string {
-    const userStore = useUserStore()
-    const token = userStore.accessToken
-    return token
-}
 // app
 const app = createApp({
     setup() {

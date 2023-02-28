@@ -1,16 +1,16 @@
 // @ts-ignore
 import { createRouter, createWebHistory } from "vue-router"
-import Home from "../views/auth/Home.vue"
+import Index from "../views/Index.vue"
 import SignUp from "../views/auth/SignUp.vue"
 import SignIn from "../views/auth/SignIn.vue"
-import StoreList from "../views/auth/StoreList.vue"
-import CreateStore from "../views/auth/CreateStore.vue"
+import StoreList from "../views/store/StoreList.vue"
+import CreateStore from "../views/store/CreateStore.vue"
 
 const routes = [
     {
-        name: "Home",
+        name: "Index",
         path: "/",
-        component: Home
+        component: Index
     },
     {
         name: "SignUp",
@@ -25,6 +25,11 @@ const routes = [
     {
         name: "Stores",
         path: "/stores",
+        component: StoreList,
+    },
+    {
+        name: "MyStores",
+        path: "/mystores",
         component: StoreList,
     },
     {

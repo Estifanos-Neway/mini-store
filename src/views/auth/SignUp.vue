@@ -1,5 +1,6 @@
 <template>
-    <h3> SignUp </h3>
+    <h4> SignUp </h4>
+    <br>
     <div v-if="errors.general" class="text-red-600">{{ errors.general }}</div>
     <form @submit.prevent="handleSubmission" class="flex flex-col max-w-xl" novalidate>
         <label for="fullName">Full Name</label>

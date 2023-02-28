@@ -3,7 +3,7 @@
     <SideBar class="col-span-1" />
     <div class="bg-slate-200 col-span-5 p-4">
       <UserHeader v-if="userStore.isAuthorized" />
-      <router-view />
+      <router-view  :key="$route.path" />
     </div>
   </div>
 </template>

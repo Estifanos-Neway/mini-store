@@ -1,5 +1,6 @@
 <template>
-    <h5> SignIn </h5>
+    <h4> SignIn </h4>
+    <br>
     <div v-if="errors.general" class="text-red-600">{{ errors.general }}</div>
     <form @submit.prevent="handleSubmission" class="flex flex-col max-w-xl" novalidate>
         <label for="email">Email</label>
@@ -39,7 +40,7 @@ const isLoading = ref<boolean>(false)
 
 // models
 const signInInput = ref<SignInInput>({
-    email: "some1@gmail.com",
+    email: "someone@gmail.com",
     password: "000000"
 })
 

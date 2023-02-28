@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.auth-nav-button.router-link-exact-active.active{
+.auth-nav-button.router-link-exact-active{
     @apply text-white bg-gray-900 dark:bg-gray-600 dark:text-white
 }

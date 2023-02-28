@@ -18,6 +18,9 @@ export const useUserStore = defineStore("userStore", {
         accessToken(state) {
             return state.tokens.accessToken
         },
+        userId(state) {
+            return state.user?.id
+        },
         refreshToken(state) {
             return state.tokens.refreshToken
         }

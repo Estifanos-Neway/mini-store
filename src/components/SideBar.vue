@@ -7,18 +7,27 @@
                 STORE
             </router-link>
             <div v-if="userStore.isAuthorized" class="flex flex-col">
-                <router-link :to="{ name: 'Stores' }" class="auth-nav-button" :class="{'active':route.query.type!=='my'}">All Stores</router-link>
-                <router-link :to="{ name: 'Stores', query: { type: 'my' } }" class="auth-nav-button" :class="{'active':route.query.type==='my'}">My Stores</router-link>
-                <router-link :to="{ name: 'CreateStore' }" class="auth-nav-button focused-auth-nav-button" :class="{'active':route.name==='CreateStore'}">Add
-                    Store</router-link>
+                <router-link :to="{ name: 'Stores' }" class="auth-nav-button">
+                    All Stores
+                </router-link>
+                <router-link :to="{ name: 'MyStores' }" class="auth-nav-button">
+                    My Stores
+                </router-link>
+                <router-link :to="{ name: 'CreateStore' }" class="auth-nav-button">
+                    Add Store
+                </router-link>
             </div>
         </div>
         <div v-if="userStore.isAuthorized" class="flex flex-col w-full auth-nav">
             <button class="auth-nav-button" @click="logout">Log Out</button>
         </div>
         <div v-else class="flex flex-col w-full auth-nav">
-            <router-link :to="{ name: 'SignUp' }" class="auth-nav-button" :class="{'active':route.name==='SignUp'}">Sign Up</router-link>
-            <router-link :to="{ name: 'SignIn' }" class="auth-nav-button" :class="{'active':route.name==='SignIn'}">Sign In</router-link>
+            <router-link :to="{ name: 'SignUp' }" class="auth-nav-button">
+                Sign Up
+            </router-link>
+            <router-link :to="{ name: 'SignIn' }" class="auth-nav-button">
+                Sign In
+            </router-link>
         </div>
     </div>
 </template>

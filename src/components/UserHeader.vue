@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { useQuery } from '@vue/apollo-composable';
-import { currentUserQuery } from '../queries/userQueries';
+import { currentUserQuery } from '../graphql/queries/userQueries';
 import { useUserStore } from '../stores/UserStore';
 import User from '../types/user';
 
@@ -23,7 +23,7 @@ const { onResult } = useQuery<{ me: User }>(
     currentUserQuery,
     null,
     {
-        pollInterval: 10000,
+        pollInterval: 60000,
         fetchPolicy: "no-cache"
     }
 )
